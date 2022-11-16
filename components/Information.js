@@ -5,9 +5,9 @@ const Information = () => {
   return (
     <View style={styles.container}>
       <Text>React Native with Thai-Nichi</Text>
-      <Text>By....Amonpan Chomklin</Text>
-      <Text>Student Id: 1913132546</Text>
-      <Text>Major: Information Technology</Text>
+      <Text>By.... Phitchaya Chatachot</Text>
+      <Text>Student Id: 1911310512</Text>
+      <Text>Major: Computer Engineer</Text>
     </View>
   )
 }
