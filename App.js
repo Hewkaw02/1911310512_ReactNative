@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, TextInput, View } from "react-native";
 import React from "react";
 import Information from "./components/Information";
 import styles from "./components/styles";
@@ -9,6 +9,9 @@ import CustomComponent from "./components/CustomComponent";
 import Logo from "./components/Logo";
 import LotsOfGreeting from "./components/LotsOfGreeting";
 import MyCustomTextWith from "./components/MyCustomTextWith";
+import Count from "./components/Count";
+import Txtinput1 from "./components/Txtinput1";
+import UserNamePassword from "./components/UserNamePassword";
 
 const App = () => {
   return (
@@ -20,7 +23,10 @@ const App = () => {
       {/* <TxtInput/> */}
       {/* <CustomComponent/> */}
       {/* <LotsOfGreeting/> */}
-      <MyCustomTextWith/>
+      {/* <MyCustomTextWith/> */}
+      {/* <Count num={2} title="Click"/> */}
+      {/* <Txtinput1/> */}
+      <UserNamePassword/>
     </View>
   );
 };
