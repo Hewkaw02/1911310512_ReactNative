@@ -20,9 +20,10 @@ const UserNamePassword = () => {
         }else{
             alert('Success');
         }
-    //Check for the Email TextInput
-    //Checked Successfully
-    //Do whatever you want
+
+        //Check for the Email TextInput
+        //Checked Successfully
+        //Do whatever you want
 
         };
 
@@ -44,8 +45,6 @@ const UserNamePassword = () => {
                 title='Submit' 
                 onPress={()=> checkTextInput()}
                 />
-
-                {/* <Text>{textEmail}</Text> */}
         </View>
     </SafeAreaView>
   )
