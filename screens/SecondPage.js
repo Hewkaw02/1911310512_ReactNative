@@ -1,11 +1,14 @@
 import { View, Text , StyleSheet } from 'react-native'
 import React from 'react'
+import Footer from '../Footer';
 
 const SecondPage = ({route}) => {
   return (
     <View style={styles.container}>
         <Text style={styles.heading}>Thai-Nichi Institute of Technology</Text>
       <Text>Values passed fome First First Page : {route.params?.name}</Text>
+
+      <Footer>www.tni.ac.th</Footer>
     </View>
   )
 }

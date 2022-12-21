@@ -17,7 +17,17 @@ const styles = StyleSheet.create({
     normalText:{
         fontSize:15,
         color:'blue'
-    }    
+    },
+    textTopStyle:{
+        fontSize: 25,
+        textAlign: "center",
+        marginBottom: 16
+    },
+    textBottomStyle:{
+        fontSize: 16,
+        textAlign: 'center',
+        color: 'grey'
+    },
 });
 
 export default styles;

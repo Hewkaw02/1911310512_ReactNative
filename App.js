@@ -8,6 +8,9 @@ import HomePost from './screens/HomePost'
 import CreatePost from './screens/CreatePost'
 import SecondPage from './screens/SecondPage'
 import FirstPage from './screens/FirstPage'
+import FirstPageRecap from './pages/FirstPageRecap'
+import SecondPageRecap from './pages/SecondPageRecap'
+import ThirdPageRecap from './pages/ThirdPageRecap'
 
 
 // function HomeScreen({navigation}){
@@ -37,12 +40,14 @@ import FirstPage from './screens/FirstPage'
 const Stack = createNativeStackNavigator();
 
 
+
 const App = () => {
   return (
 
     <NavigationContainer>
       <Stack.Navigator
         initialRouteName='Home'
+
         screenOptions={{
           headerStyle:{
             backgroundColor:'#00bbff'
@@ -50,7 +55,8 @@ const App = () => {
           headerTintColor:'#ffff',
           headerTitleStyle:{
             fontWeight:'bold'
-          },headerTitleAlign:'center'
+          },headerTitleAlign:'center',
+          
         }}
       >
 
@@ -60,8 +66,12 @@ const App = () => {
         {/* <Stack.Screen name='Home' component={HomePost} />
         <Stack.Screen name='Creates' component={CreatePost} /> */}
         
-        <Stack.Screen name='First' component={FirstPage} />
-        <Stack.Screen name='Second' component={SecondPage} />
+        {/* <Stack.Screen name='First' component={FirstPage} />
+        <Stack.Screen name='Second' component={SecondPage} /> */}
+
+        <Stack.Screen name='FP' component={FirstPageRecap}/>
+        <Stack.Screen name='SP' component={SecondPageRecap}/>
+        <Stack.Screen name='TP' component={ThirdPageRecap}/>
 
       </Stack.Navigator>
     </NavigationContainer>
