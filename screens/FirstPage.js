@@ -1,10 +1,11 @@
-import { View, Text ,TextInput , Button , StyleSheet} from 'react-native'
-import React , {useState} from 'react'
+import { View, Text, TextInput, Button, StyleSheet } from 'react-native'
+import React, { useState } from 'react'
+import Footer from '../Footer';
 
-const FirstPage = ({navigation}) => {
+const FirstPage = ({ navigation }) => {
 
-    const [nameText , setNameText] = useState('');
-    return (
+    const [nameText, setNameText] = useState('');
+    return (    
         <View style={styles.container}>
 
             <Text style={styles.heading}>Thai-Nichi Institute of Technology</Text>
@@ -12,14 +13,19 @@ const FirstPage = ({navigation}) => {
             <TextInput
                 placeholder='Please Text here!!!!'
                 style={styles.input}
-                value = {nameText}
+                value={nameText}
                 onChangeText={setNameText}
             />
-            <Button title='Go Next' onPress={()=> navigation.navigate('Second',{
-                name:nameText
-            })}/>
-        
+            <Button title='Go Next' onPress={() => navigation.navigate('Second', {
+                name: nameText
+            })} />
+
+            
+            {/* <Text style={styles.textStyle}>www.tni.ac.th</Text> */}
+
+            <Footer>www.tni.ac.th</Footer>
         </View>
+        
     )
 }
 
@@ -40,14 +46,14 @@ const styles = StyleSheet.create({
         marginVertical: 10,
     },
     input: {
-        borderColor:'black',
+        borderColor: 'black',
         width: 250,
         height: 44,
         padding: 10,
         marginTop: 20,
         marginBottom: 10,
         backgroundColor: '#acffff'
-        },
+    },
 });
 
 export default FirstPage
