@@ -21,7 +21,7 @@ const HomeScreen = ({ navigation }) => {
         // Use `setOptions` to update the button that we previously specified
         // Now the button includes an `onPress` handler to update the count
         navigation.setOptions({
-              headerRight: () => (
+            headerRight: () => (
                 <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
 
                     <Item
@@ -30,8 +30,8 @@ const HomeScreen = ({ navigation }) => {
                         onPress={() => alert('ลงทะเบียน')}
                     />
 
-                </HeaderButtons> 
-              ),
+                </HeaderButtons>
+            ),
 
             headerLeft: () => (
                 <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
@@ -39,7 +39,7 @@ const HomeScreen = ({ navigation }) => {
                     <Item
                         title="menu"
                         iconName="menu"
-                        onPress={() => alert('menu')}
+                        onPress={() => alert('เมนูคำสั่ง')}
                     />
 
                 </HeaderButtons>

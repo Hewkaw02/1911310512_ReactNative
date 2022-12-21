@@ -1,82 +1,85 @@
-import { View, Text, Button } from 'react-native'
-import React from 'react'
-import { NavigationContainer } from '@react-navigation/native'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import HomeScreen from './screens/HomeScreen'
-import AboutScreen from './screens/AboutScreen'
-import HomePost from './screens/HomePost'
-import CreatePost from './screens/CreatePost'
-import SecondPage from './screens/SecondPage'
-import FirstPage from './screens/FirstPage'
+// React Native Navigation Drawer
+// https://aboutreact.com/react-native-navigation-drawer/
+import 'react-native-gesture-handler';
+
+import * as React from 'react';
+
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+
 import FirstPageRecap from './pages/FirstPageRecap'
 import SecondPageRecap from './pages/SecondPageRecap'
 import ThirdPageRecap from './pages/ThirdPageRecap'
 
-
-// function HomeScreen({navigation}){
-//   return(
-//       <View style={{flex:1 , alignItem: "center" , justifyContent:"center"}}>
-//         <Text style={{textAlign:'center'}}>
-//         Home Screen
-//         </Text>
-//         <Button
-//         title='เกี่ยวกับเรา'
-//         onPress={()=>navigation.navigate('About')}
-//         />     
-//       </View>
-//   );
-// }
-
-// function AboutScreen(navigation){
-//   return(
-//       <View style={{flex:1 , alignItem: "center" , justifyContent:"center"}}>
-//         <Text style={{textAlign:'center'}}>
-//         เกี่ยวกับเรา
-//         </Text>
-//       </View> 
-//   );
-// }
-
 const Stack = createNativeStackNavigator();
+const Drawer = createDrawerNavigator();
 
-
-
-const App = () => {
+const FirstScreenStack = () => {
   return (
-
-    <NavigationContainer>
       <Stack.Navigator
-        initialRouteName='Home'
-
-        screenOptions={{
-          headerStyle:{
-            backgroundColor:'#00bbff'
-          },
-          headerTintColor:'#ffff',
-          headerTitleStyle:{
-            fontWeight:'bold'
-          },headerTitleAlign:'center',
-          
-        }}
+        initialRouteName="FirstPage"
+        screenOptions={{headerShown: false}}
       >
-
-        {/* <Stack.Screen name='Home' component={HomeScreen} /> */}
-        {/* <Stack.Screen name='About' component={AboutScreen} /> */}
-
-        {/* <Stack.Screen name='Home' component={HomePost} />
-        <Stack.Screen name='Creates' component={CreatePost} /> */}
-        
-        {/* <Stack.Screen name='First' component={FirstPage} />
-        <Stack.Screen name='Second' component={SecondPage} /> */}
-
-        <Stack.Screen name='FP' component={FirstPageRecap}/>
-        <Stack.Screen name='SP' component={SecondPageRecap}/>
-        <Stack.Screen name='TP' component={ThirdPageRecap}/>
-
+        <Stack.Screen
+          name="FirstPage"
+          component={FirstPageRecap}
+        />
       </Stack.Navigator>
-    </NavigationContainer>
-
-  )
+  );
 }
 
-export default App
+const SecondScreenStack = () => {
+  return (
+    <Stack.Navigator
+      initialRouteName="SecondPage"
+      screenOptions={{headerShown: false}}
+    >
+      <Stack.Screen
+        name="SecondPage"
+        component={SecondPageRecap}/>
+      <Stack.Screen
+        name="ThirdPage"
+        component={ThirdPageRecap}/>
+    </Stack.Navigator>
+  );
+}
+
+function App() {
+  return (
+    <NavigationContainer>
+      <Drawer.Navigator
+      useLegacyImplementation
+        screenOptions={{
+          drawerStyle: {
+            backgroundColor: '#c6cbef', //Set Drawer background
+            width: 250, //Set Drawer width
+          },
+          headerStyle: {
+            backgroundColor: '#f4511e', //Set Header color
+          },
+          headerTintColor: '#fff', //Set Header text color
+          headerTitleStyle: {
+            fontWeight: 'bold', //Set Header text style
+          }
+        }}>
+        <Drawer.Screen
+          name="FirstPage"
+          options={{
+            drawerLabel: 'First page Option',
+            title: 'First Stack'
+          }}
+          component={FirstScreenStack} />
+        <Drawer.Screen
+          name="SecondPage"
+          options={{
+            drawerLabel: 'Second page Option',
+            title: 'Second Stack'
+          }}
+          component={SecondScreenStack} />
+      </Drawer.Navigator>
+    </NavigationContainer>
+  );
+}
+
+export default App;
