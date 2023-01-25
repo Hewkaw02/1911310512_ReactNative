@@ -1,113 +1,67 @@
-import { View, Text, Button } from 'react-native'
-import React from 'react'
+import { View, Text, ActivityIndicator, FlatList, Image } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { color } from 'react-native-reanimated';
 
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { NavigationContainer } from '@react-navigation/native';
-import {
-  createDrawerNavigator,
-  DrawerItem,
-  DrawerContentScrollView,
-  DrawerItemList
-} from '@react-navigation/drawer'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Ionicons } from '@expo/vector-icons'
+const App = () => {
 
-import HomeScreen2 from './screens/HomeScreen2';
-import SettingScreen from './screens/SettingScreen';
-import HomeScreen from './screens/HomeScreen';
+  const [isLoading, setLoading] = useState();
+  const [data, setData] = useState([]);
 
-const Stack = createNativeStackNavigator();
-const Drawer = createDrawerNavigator();
-const Tab = createBottomTabNavigator();
+  const getDataNews = async () => {
+    try {
+      const response = await fetch('https://newsapi.org/v2/top-headlines?country=th&apiKey=ab0d4aca4cea481e8157d31c68eb2b23');
+      const json = await response.json();
+      setData(json.articles)
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
 
-function CustomDrawerContent(props) {
+    getDataNews();
+
+  }, [])
+
+  const _renderItem = ({ item }) => {
+    return (
+      <View style={{ flex: 1 }}>
+        <View style={{ flex: 1, flexDirection: 'row', margin: 5 }}>
+          <Image resizeMode='cover'
+            source={{ uri: item.urlToImage }}
+            style={{ flex: 1, width: '100%', height: '100%' }} />
+
+          <View style={{ width: 200, margin: 5 }}>
+
+            <Text style={{ fontSize: 14, marginBottom: 5 }}>{item.title}</Text>
+            <Text style={{ fontSize: 10 }}>{item.source.name}</Text>
+            <Text style={{ fontSize: 10, color: 'red' }}>{item.publishedAt}</Text>
+          </View>
+        </View>
+      </View>
+    )
+  }
+
   return (
-    <DrawerContentScrollView {...props}>
-      <DrawerItemList {...props} />
-    </DrawerContentScrollView>
-  );
-}
+    <View style={{ flex: 1, padding: 24 }}>
+      {
+        isLoading
+          ? <ActivityIndicator size="large" color="#0000ff" />
+          : (
+            <FlatList
+              style={{ margin: 6 }}
+              data={data}
+              keyExtractor={item => item.title}
+              renderItem={_renderItem}
+            />
+          )
+      }
 
-function HomePage(){
-  return(
-    <Stack.Navigator
-      initialRouteName="Home"
-      screenOptions={{
-        headerShown: false,
-      }}
-    >
-      <Stack.Screen name="Home Screen" component={HomeScreen2} />
-    </Stack.Navigator>
+
+    </View>
   )
 }
 
-function SettingPage(){
-  <Stack.Navigator
-  initialRouteName="Home"
-  screenOptions={{
-    headerShown: false,
-  }}
->
-  <Stack.Screen name="Setting Screen" component={SettingScreen} />
-</Stack.Navigator>
-}
-
-
-function MyTab() {
-  return (
-    <Tab.Navigator
-      screenOptions={({ route }) => ({
-        tabBarIcon: ({ focused, color, size }) => {
-          let iconName;
-          if (route.name === "Home") {
-            iconName = focused
-              ? "ios-home"
-              : "ios-home-outline";
-          } else if (route.name === "Settings") {
-            iconName = focused 
-            ? "ios-list" 
-            : "ios-list-outline";
-          }
-          return <Ionicons name={iconName} size={size} color={color} />;
-        },
-        tabBarActiveTintColor: "green",
-        tabBarInactiveTintColor: "blue",
-      })}
-    >
-      <Tab.Screen name="Home" component={HomeScreen2} />
-      <Tab.Screen name="Settings" component={SettingScreen} />
-    </Tab.Navigator>
-  );
-}
-
-function MyDrawer() {
-  return(
-    <Drawer.Navigator
-      screenOptions={{
-        drawerStyle: {
-          backgroundColor: "white",
-          width: 240,
-        },drawerActiveTintColor:"red"
-      }}
-      useLegacyImplementation
-      drawerContent={(props) => <CustomDrawerContent {...props} />}
-    >
-      <Drawer.Screen name="Home" component={MyTab} />
-      <Drawer.Screen name="Setting" component={SettingScreen} />
-
-    </Drawer.Navigator>
-  );
-}
-
-function App() {
-  return (
-    <NavigationContainer>
-      <MyDrawer/>
-    </NavigationContainer>
-  );
-}
-
-
 export default App
-
