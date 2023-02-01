@@ -11,7 +11,8 @@ import {
 
 import HomeScreen2 from './screens/HomeScreen2'
 import ProductScreen from './screens/ProductScreen'
-
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import DetailScreen from './screens/DetailScreen'
 
 function CustomDrawerContent(props) {
   const { navigation } = props
@@ -21,6 +22,22 @@ function CustomDrawerContent(props) {
       <DrawerItem label={'Close Drawer'} onPress={() => navigation.closeDrawer()} />
     </DrawerContentScrollView>
   );
+}
+
+const Stack = createNativeStackNavigator();
+
+function ProductStack(){
+  return(
+    <Stack.Navigator screenOptions={{headerStyle:{
+      backgroundColor:'#00dfdf'
+    },headerTintColor:'#fff',
+    headerTitleStyle:{
+      fontWeight:'bold'
+    }}}>
+      <Stack.Screen name="Product" component={ProductScreen}/>
+      <Stack.Screen name="Detail" component={DetailScreen}/>
+    </Stack.Navigator>
+  )
 }
 
 const Drawer = createDrawerNavigator();
@@ -33,7 +50,7 @@ function MyDrawer() {
       }
     }} useLegacyImplementation drawerContent={(props) => <CustomDrawerContent {...props} />}>
       <Drawer.Screen name='Home' component={HomeScreen2} />
-      <Drawer.Screen name='Product' component={ProductScreen} />
+      <Drawer.Screen name='Product' component={ProductStack} />
     </Drawer.Navigator>
   )
 }
