@@ -82,7 +82,10 @@ const ProductScreen = ({ navigation }) => {
         <TouchableOpacity 
         style={styles.addButtonStyle}
         onPress={()=>{
-          navigation.navigate('Detail')
+          navigation.navigate('Detail' , {
+            id : item.id,
+            title : item.title
+          })
         }}>
           <View style={{ flex: 1 }}>
             <View style={{ flex: 1, flexDirection: 'row', margin: 5 }}>
